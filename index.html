@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>d3-voronoi-treemap usage</title>
+    <meta name="description" content="d3-voronoi-treemap plugin to remake 'The Costs of Being Fat, in Actual Dollars'">
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://rawcdn.githack.com/Kcnarf/d3-weighted-voronoi/v1.0.1/build/d3-weighted-voronoi.js"></script>
+    <script src="https://rawcdn.githack.com/Kcnarf/d3-voronoi-map/v1.2.0/build/d3-voronoi-map.js"></script>
+    <script src="https://rawcdn.githack.com/Kcnarf/d3-voronoi-treemap/v1.1.0/build/d3-voronoi-treemap.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <script src="./data.js"></script>
+    <style>
+      body{
+        font-family: 'Roboto', sans-serif;
+      }
+      svg {
+        background-color: rgb(250,250,250);
+      }
+
+      .x-axis,.y-axis{
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700
+      }
+
+      .tick line{
+        opacity: 0
+      }
+
+
+      .annotation path {
+      stroke-width: 1.5px;
+      /* stroke: #a19a8f; */
+      stroke:black;
+      color: white;;
+      fill: none;
+      }
+
+      .annotation-subject path{
+        stroke-dasharray: 3 !important;
+      }
+
+      .annotation path.connector-arrow{
+      /* fill: #a19a8f; */
+      fill:black;
+      }
+
+      .annotation text {
+      /* fill: #a19a8f; */
+      fill:black;
+      font-family: 'Roboto', sans-serif;
+      }
+
+      .annotation-note-content {
+      font-weight: bold;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="chart"></div>
+
+    <script src="./data.js"></script>
+    <script src="./data2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.12.1/d3-annotation.min.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+    <script src='./textures.min.js'></script>
+
+    <script>
+
+    var parser = d3.timeParse("%Y-%m")
+
+
+  //begin: layout conf.
+  var width = 1000,
+      height = 500,
+      margin = {
+          top: 10,
+          right: 50,
+          bottom: 30,
+          left: 40
+      };
+
+
+
+  var svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
+
+
+
+  //  data.date = parser(data.yearmonth);
+  data.forEach(d =>
+      d['date'] = parser(d.yearmonth)
+  )
+
+  console.log(data)
+
+
+  var xScale = d3.scaleTime().domain(d3.extent(data, d => d.date)).range([margin.left, width - margin.right]);
+
+
+  //var yScale = d3.scaleLinear().domain(d3.extent(data,d=>d.detection)).range([height-margin.bottom,margin.top])
+
+  var yScale = d3.scaleLinear().domain([0, 1000]).range([height - margin.bottom, margin.top])
+
+
+  var texture = textures
+      .lines()
+      .size(10)
+      .strokeWidth(1)
+      .stroke("#DA6C60");
+
+  var bgRects = svg.append("g");
+
+  svg.call(texture);
+
+  bgRects.append("rect")
+      .attr("class","bgRect")
+      .attr("x", margin.left)
+      .attr("y", margin.top)
+      .attr("width", xScale(parser("2018-01")) - xScale(parser("2017-01")))
+      .attr("height", yScale(0) - yScale(1000))
+      .attr("fill", texture.url());
+
+
+  bgRects.append("rect")
+      .attr("class","bgRect")
+      .attr("x", xScale(parser("2019-01")))
+      .attr("y", margin.top)
+      .attr("width", xScale(parser("2020-01")) - xScale(parser("2019-01")))
+      .attr("height", yScale(0) - yScale(1000))
+      .attr("fill", texture.url());
+
+
+
+
+
+
+  var xAxis = svg.append("g").attr("class", "x-axis")
+      .attr("transform", `translate(0, ${height-margin.bottom} )`)
+      .call(d3.axisBottom(xScale)
+          .tickFormat(d3.timeFormat("%Y-%m")))
+
+
+
+
+  var yAxis = svg.append("g").attr("class", "y-axis")
+      .attr("transform", `translate(${margin.left}, 0)`)
+      .call(d3.axisLeft(yScale));
+
+
+
+  var duration = 6000;
+
+  //grouped bar
+
+  data2.forEach(d =>
+      d['date'] = parser(d.yearmonth)
+  )
+
+  var stack = d3.stack()
+      .keys(["sentinel1", "viirs"])
+
+  var series = stack(data2);
+
+  console.log(series)
+
+
+  var xScaleBar = d3.scaleBand().domain(data2.map(function(d) {
+          return d.date;
+      }))
+      .range([margin.left, width - margin.right])
+      .padding(0.1);
+
+  var color = d3.scaleOrdinal().domain(["sentinel1", "viirs"]).range(["#8FA0D8", "#C0594F"]);
+
+
+  var delay = function(d, i) {
+      return i * (duration / 48); //(duration/48)
+  };
+  // Create groups for each series, rects for each segment
+  var groups = svg.selectAll("g.sensor")
+      .data(series)
+      .enter().append("g")
+      .attr("class", "sensor")
+      .attr("fill", d => color(d.key));
+
+  var rect = groups.selectAll("rect")
+      .data(function(d) {
+          console.log(d);
+          return d;
+      })
+      .enter()
+      .append("rect") //doesn't work when I use .join("rect") here, why?
+      .attr("y", d => yScale(d[1]))
+      .attr("x", (d, i) => xScaleBar(d.data.date))
+      .attr("width", xScaleBar.bandwidth())
+      .attr("height", 0)
+      .transition()
+      // .duration(6000)
+      .attr("height", d => yScale(d[0]) - yScale(d[1]))
+      .delay(delay);
+
+  // .transition(t)
+  //    .attr('y', d => yScale(yAccessor(d)))
+  //    .attr('width', d => xScale(xAccessor(d)))
+  //    .attr('height', yScale.bandwidth())
+  //    .delay(delay);
+
+
+  // animated line
+
+  var line = d3.line()
+      // .curve(d3.curveBasis)
+      .x(d => xScale(d.date))
+      .y(d => yScale(d.detection));
+
+  svg
+      .append("path")
+      .attr("class", "line")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 3)
+      .attr("d", line);
+
+  var path = d3.select("path.line");
+
+  var pathLength = path.node().getTotalLength();
+  console.log(pathLength)
+
+  path
+      .attr("stroke-dashoffset", pathLength)
+      .attr("stroke-dasharray", pathLength)
+      .transition()
+      .duration(duration)
+      .ease(d3.easeLinear)
+      .attr("stroke-dashoffset", 0)
+      .on("end", showAnnotations)
+
+
+      var type = d3.annotationCalloutCircle;
+
+     var filtered = data.filter(function (d) { return d.yearmonth === "2017-10" || d.yearmonth === "2018-11" || d.yearmonth === "2019-10" || d.yearmonth === "2020-5"; });
+
+     console.log(filtered)
+      //
+      var annotationData = _.chain(filtered)
+        .map((d, i) => {
+          return {
+            data: {
+              date: d.date,
+              detection: d.detection
+            },
+            note: {
+              title: d.yearmonth,
+              label: `Number of vessels detected: ${d.detection}`
+            },
+            x: xScale(d.date),
+            y: yScale(d.detection),
+            dx: (d.yearmonth=="2017-10" || d.yearmonth=="2019-10")?30:20,
+            dy: (d.yearmonth=="2017-10" || d.yearmonth=="2019-10")?30:-20,
+            subject: {
+                radius: 20
+            }
+          }
+        })
+        .value();
+
+      var makeAnnotations = d3.annotation()
+          .type(type)
+          //accessors & accessorsInverse not needed
+          //if using x, y in annotations JSON
+          .annotations(annotationData);
+
+      svg.append("g")
+          .attr("class", "annotation-group")
+          .call(makeAnnotations);
+
+          d3.selectAll(".annotation-note-bg").attr("fill","none");
+          d3.selectAll(".annotations").style("opacity",0);
+
+
+          function showAnnotations(){
+            d3.selectAll(".annotations").style("opacity",1);
+          }
+
+
+
+    </script>
+  </body>
+</html>
