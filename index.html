@@ -7,7 +7,6 @@
     <meta name="description" content="Animated line chart demo">
     <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
-    <script src="./data.js"></script>
     <style>
       body{
         font-family: 'Roboto', sans-serif;
@@ -61,12 +60,18 @@
 
     <script src="./data.js"></script>
     <script src="./data2.js"></script>
+    <script src="./data3.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.12.1/d3-annotation.min.js"></script>
     <script  src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
     <script src='./textures.min.js'></script>
 
     <script>
-    var parser = d3.timeParse("%Y-%m")
+
+
+
+    //********************
+    // setup, scales, etc.
+    //********************
 
 
     //begin: layout conf.
@@ -80,53 +85,30 @@
         };
 
 
-
     var svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
 
-    //  data.date = parser(data.yearmonth);
-    data.forEach(d =>
+    var max = 1400;
+    //d3.max(dataBar,d=>d.max);
+
+
+    //for all charts
+    var yScale = d3.scaleLinear().domain([0, max]).range([height - margin.bottom, margin.top])
+    //var yScale = d3.scaleLinear().domain(d3.extent(data,d=>d.detection)).range([height-margin.bottom,margin.top])
+
+
+    //data for line chart
+    var parser = d3.timeParse("%Y-%m")
+    //convert string to date
+    dataLine.forEach(d =>
         d['date'] = parser(d.yearmonth)
     )
 
-    //console.log(data)
+    //duration for transition
+    var duration = 6000;
 
 
-    var xScale = d3.scaleTime().domain(d3.extent(data, d => d.date)).range([margin.left, width - margin.right]);
-
-
-    //var yScale = d3.scaleLinear().domain(d3.extent(data,d=>d.detection)).range([height-margin.bottom,margin.top])
-
-    var yScale = d3.scaleLinear().domain([0, 1000]).range([height - margin.bottom, margin.top])
-
-
-    var texture = textures
-        .lines()
-        .size(10)
-        .strokeWidth(1)
-        .stroke("#DA6C60");
-
-    var bgRects = svg.append("g");
-
-    svg.call(texture);
-
-    bgRects.append("rect")
-        .attr("class", "bgRect")
-        .attr("x", margin.left)
-        .attr("y", margin.top)
-        .attr("width", xScale(parser("2018-01")) - xScale(parser("2017-01")))
-        .attr("height", yScale(0) - yScale(1000))
-        .attr("fill", texture.url());
-
-
-    bgRects.append("rect")
-        .attr("class", "bgRect")
-        .attr("x", xScale(parser("2019-01")))
-        .attr("y", margin.top)
-        .attr("width", xScale(parser("2020-01")) - xScale(parser("2019-01")))
-        .attr("height", yScale(0) - yScale(1000))
-        .attr("fill", texture.url());
-
-
+    //x scale for line chart
+    var xScale = d3.scaleTime().domain(d3.extent(dataLine, d => d.date)).range([margin.left, width - margin.right]);
 
 
     var xAxis = svg.append("g").attr("class", "x-axis")
@@ -135,31 +117,62 @@
             .tickFormat(d3.timeFormat("%Y-%m")))
 
 
-
-
     var yAxis = svg.append("g").attr("class", "y-axis")
         .attr("transform", `translate(${margin.left}, 0)`)
         .call(d3.axisLeft(yScale));
 
+    // texture for bg
+    var texture = textures
+        .lines()
+        .size(10)
+        .strokeWidth(1)
+        .stroke("#DA6C60");
+
+    svg.call(texture);
 
 
-    var duration = 6000;
 
+
+    //**************
+    //bg rectangles to seperate years
+    //**************
+
+    var bgRects = svg.append("g");
+
+    bgRects.append("rect")
+        .attr("class", "bgRect")
+        .attr("x", margin.left)
+        .attr("y", margin.top)
+        .attr("width", xScale(parser("2018-01")) - xScale(parser("2017-01")))
+        .attr("height", yScale(0) - yScale(max))
+        .attr("fill", texture.url());
+
+    bgRects.append("rect")
+        .attr("class", "bgRect")
+        .attr("x", xScale(parser("2019-01")))
+        .attr("y", margin.top)
+        .attr("width", xScale(parser("2020-01")) - xScale(parser("2019-01")))
+        .attr("height", yScale(0) - yScale(max))
+        .attr("fill", texture.url());
+
+
+
+
+    //**************
     //grouped bar
+    //**************
 
-    data2.forEach(d =>
+    dataStackedBar.forEach(d =>
         d['date'] = parser(d.yearmonth)
     )
 
     var stack = d3.stack()
         .keys(["sentinel1", "viirs"])
 
-    var series = stack(data2);
-
-    console.log(series)
+    var series = stack(dataStackedBar);
 
 
-    var xScaleBar = d3.scaleBand().domain(data2.map(function(d) {
+    var xScaleBar = d3.scaleBand().domain(dataStackedBar.map(function(d) {
             return d.date;
         }))
         .range([margin.left, width - margin.right])
@@ -172,36 +185,56 @@
         return i * (duration / 48); //(duration/48)
     };
     // Create groups for each series, rects for each segment
-    var groups = svg.selectAll("g.sensor")
-        .data(series)
-        .enter().append("g")
-        .attr("class", "sensor")
-        .attr("fill", d => color(d.key));
-
-    var rect = groups.selectAll("rect")
-        .data(function(d) {
-            console.log(d);
-            return d;
-        })
-        .enter()
-        .append("rect") //doesn't work when I use .join("rect") here, why?
-        .attr("y", d => yScale(d[1]))
-        .attr("x", (d, i) => xScaleBar(d.data.date))
-        .attr("width", xScaleBar.bandwidth())
-        .attr("height", 0)
-        .transition()
-        // .duration(6000)
-        .attr("height", d => yScale(d[0]) - yScale(d[1]))
-        .delay(delay);
-
-    // .transition(t)
-    //    .attr('y', d => yScale(yAccessor(d)))
-    //    .attr('width', d => xScale(xAccessor(d)))
-    //    .attr('height', yScale.bandwidth())
-    //    .delay(delay);
+    // var groups = svg.selectAll("g.sensor")
+    //     .data(series)
+    //     .enter().append("g")
+    //     .attr("class", "sensor")
+    //     .attr("fill", d => color(d.key));
+    //
+    // var rect = groups.selectAll("rect")
+    //     .data(function(d) {
+    //         console.log(d);
+    //         return d;
+    //     })
+    //     .enter()
+    //     .append("rect") //doesn't work when I use .join("rect") here, why?
+    //     .attr("y", d => yScale(d[1]))
+    //     .attr("x", (d, i) => xScaleBar(d.data.date))
+    //     .attr("width", xScaleBar.bandwidth())
+    //     .attr("height", 0)
+    //     .transition()
+    //     // .duration(6000)
+    //     .attr("height", d => yScale(d[0]) - yScale(d[1]))
+    //     .delay(delay);
 
 
+    //*********
+    //bar chart
+    //*********
+
+    var barGroup = svg.append("g");
+
+    dataBar.forEach(d =>
+        d['date'] = parser(d.yearmonth)
+    )
+
+    barGroup.selectAll("rect.bar")
+    .data(dataBar).enter().append("rect").attr("class","bar")
+    .attr("x", d => xScaleBar(d.date))
+    .attr("y", d=>yScale(d.max))
+    .attr("width", xScaleBar.bandwidth()) //xScale(parser("2020-12"))/48)
+    .attr("height", 0)
+    .transition()
+    .attr("height",d=> height - margin.bottom - yScale(d.max))
+    .delay(delay)
+    .attr("fill","#C0594F")
+    .attr("stroke","black")
+
+
+
+    //**************
     // animated line
+    //**************
 
     var line = d3.line()
         // .curve(d3.curveBasis)
@@ -211,12 +244,12 @@
     svg
         .append("path")
         .attr("class", "line")
-        .datum(data)
+        .datum(dataLine)
         .attr("fill", "none")
-        .attr("stroke", "steelblue")
+        .attr("stroke", "#8FA0D8")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
+        .attr("stroke-width", 3.5)
         .attr("d", line);
 
     var path = d3.select("path.line");
@@ -234,10 +267,15 @@
         .on("end", showAnnotations)
 
 
+
+    //***********
+    //annotations
+    //***********
+
     var type = d3.annotationCalloutCircle;
 
-    var filtered = data.filter(function(d) {
-        return d.yearmonth === "2017-10" || d.yearmonth === "2018-11" || d.yearmonth === "2019-10" || d.yearmonth === "2020-5";
+    var filtered = dataBar.filter(function(d) {
+        return d.yearmonth === "2017-10" || d.yearmonth === "2018-11" || d.yearmonth === "2019-9" || d.yearmonth === "2020-5";
     });
 
     console.log(filtered)
@@ -247,16 +285,18 @@
             return {
                 data: {
                     date: d.date,
-                    detection: d.detection
+                    max: d.max,
+                    totalyear: d.totalyear,
+                    description: d.description
                 },
                 note: {
-                    title: d.yearmonth,
-                    label: `Number of vessels detected: ${d.detection}`
+                    title: `Yearly total: ${d.totalyear}  Max: ${d.max}`,
+                    label: `${d.description}`
                 },
                 x: xScale(d.date),
-                y: yScale(d.detection),
-                dx: (d.yearmonth == "2017-10" || d.yearmonth == "2019-10") ? 30 : 20,
-                dy: (d.yearmonth == "2017-10" || d.yearmonth == "2019-10") ? 30 : -20,
+                y: yScale(d.max),
+                dx: (d.yearmonth == "2017-10" || d.yearmonth == "2019-9") ? 30 : 30,
+                dy: (d.yearmonth == "2017-10" || d.yearmonth == "2019-9") ? 30 : -30,
                 subject: {
                     radius: 20
                 }
@@ -277,10 +317,8 @@
     d3.selectAll(".annotation-note-bg").attr("fill", "none");
     d3.selectAll(".annotations").style("opacity", 0);
 
-    d3.selectAll(".annotation-note-label").style("font-weight", 700);
-
-    d3.selectAll(".annotation-note-title").style("font-weight", 400);
-
+    d3.selectAll(".annotation-note-label").style("font-weight", 400);
+    d3.selectAll(".annotation-note-title").style("font-weight", 700);
 
 
     function showAnnotations() {

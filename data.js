@@ -1,4 +1,4 @@
-var data =
+var dataLine =
 [
   {
     "id": 1,

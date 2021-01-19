@@ -1,4 +1,4 @@
-var data2 = [
+var dataStackedBar = [
   {
     "yearmonth": "2017-1",
     "sentinel1": 0,
