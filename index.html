@@ -58,9 +58,10 @@
   <body>
     <div id="chart"></div>
 
-    <script src="./data.js"></script>
+    <!-- <script src="./data.js"></script>
     <script src="./data2.js"></script>
-    <script src="./data3.js"></script>
+    <script src="./data3.js"></script> -->
+    <script src="./dataAll.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.12.1/d3-annotation.min.js"></script>
     <script  src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
     <script src='./textures.min.js'></script>
@@ -87,7 +88,7 @@
 
     var svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
 
-    var max = 1400;
+    var max = 1000;
     //d3.max(dataBar,d=>d.max);
 
 
@@ -99,7 +100,7 @@
     //data for line chart
     var parser = d3.timeParse("%Y-%m")
     //convert string to date
-    dataLine.forEach(d =>
+    dataAll.forEach(d =>
         d['date'] = parser(d.yearmonth)
     )
 
@@ -108,7 +109,7 @@
 
 
     //x scale for line chart
-    var xScale = d3.scaleTime().domain(d3.extent(dataLine, d => d.date)).range([margin.left, width - margin.right]);
+    var xScale = d3.scaleTime().domain(d3.extent(dataAll, d => d.date)).range([margin.left, width - margin.right]);
 
 
     var xAxis = svg.append("g").attr("class", "x-axis")
@@ -162,73 +163,74 @@
     //grouped bar
     //**************
 
-    dataStackedBar.forEach(d =>
-        d['date'] = parser(d.yearmonth)
-    )
+    // dataStackedBar.forEach(d =>
+    //     d['date'] = parser(d.yearmonth)
+    // )
 
     var stack = d3.stack()
-        .keys(["sentinel1", "viirs"])
+        .keys(["satellite", "viirs"])
 
-    var series = stack(dataStackedBar);
+    var series = stack(dataAll);
 
 
-    var xScaleBar = d3.scaleBand().domain(dataStackedBar.map(function(d) {
+    var xScaleBar = d3.scaleBand().domain(dataAll.map(function(d) {
             return d.date;
         }))
         .range([margin.left, width - margin.right])
         .padding(0.1);
 
-    var color = d3.scaleOrdinal().domain(["sentinel1", "viirs"]).range(["#8FA0D8", "#C0594F"]);
+    var color = d3.scaleOrdinal().domain(["satellite", "viirs"]).range(["#8FA0D8", "#C0594F"]);
 
 
     var delay = function(d, i) {
         return i * (duration / 48); //(duration/48)
     };
     // Create groups for each series, rects for each segment
-    // var groups = svg.selectAll("g.sensor")
-    //     .data(series)
-    //     .enter().append("g")
-    //     .attr("class", "sensor")
-    //     .attr("fill", d => color(d.key));
-    //
-    // var rect = groups.selectAll("rect")
-    //     .data(function(d) {
-    //         console.log(d);
-    //         return d;
-    //     })
-    //     .enter()
-    //     .append("rect") //doesn't work when I use .join("rect") here, why?
-    //     .attr("y", d => yScale(d[1]))
-    //     .attr("x", (d, i) => xScaleBar(d.data.date))
-    //     .attr("width", xScaleBar.bandwidth())
-    //     .attr("height", 0)
-    //     .transition()
-    //     // .duration(6000)
-    //     .attr("height", d => yScale(d[0]) - yScale(d[1]))
-    //     .delay(delay);
+    var groups = svg.selectAll("g.sensor")
+        .data(series)
+        .enter().append("g")
+        .attr("class", "sensor")
+        .attr("fill", d => color(d.key));
+
+    var rect = groups.selectAll("rect")
+        .data(function(d) {
+            console.log(d);
+            return d;
+        })
+        .enter()
+        .append("rect") //doesn't work when I use .join("rect") here, why?
+        .attr("y", d => yScale(d[1]))
+        .attr("x", (d, i) => xScaleBar(d.data.date))
+        .attr("width", xScaleBar.bandwidth())
+        .attr("height", 0)
+        .attr("stroke","black")
+        .transition()
+        // .duration(6000)
+        .attr("height", d => yScale(d[0]) - yScale(d[1]))
+        .delay(delay);
 
 
     //*********
     //bar chart
     //*********
 
-    var barGroup = svg.append("g");
+    // var barGroup = svg.append("g");
 
-    dataBar.forEach(d =>
-        d['date'] = parser(d.yearmonth)
-    )
+    // dataBar.forEach(d =>
+    //     d['date'] = parser(d.yearmonth)
+    // )
 
-    barGroup.selectAll("rect.bar")
-    .data(dataBar).enter().append("rect").attr("class","bar")
-    .attr("x", d => xScaleBar(d.date))
-    .attr("y", d=>yScale(d.max))
-    .attr("width", xScaleBar.bandwidth()) //xScale(parser("2020-12"))/48)
-    .attr("height", 0)
-    .transition()
-    .attr("height",d=> height - margin.bottom - yScale(d.max))
-    .delay(delay)
-    .attr("fill","#C0594F")
-    .attr("stroke","black")
+    // barGroup.selectAll("rect.bar")
+    // .data(dataAll).enter().append("rect").attr("class","bar")
+    // .attr("x", d => xScaleBar(d.date))
+    // .attr("y", d=>yScale(d.max))
+    // .attr("width", xScaleBar.bandwidth()) //xScale(parser("2020-12"))/48)
+    // .attr("height", 0)
+    // .transition()
+    // .attr("height",d=> height - margin.bottom - yScale(d.max))
+    // .delay(delay)
+    // .attr("fill","#C0594F")
+    // .attr("stroke","black")
 
 
 
@@ -239,23 +241,23 @@
     var line = d3.line()
         // .curve(d3.curveBasis)
         .x(d => xScale(d.date))
-        .y(d => yScale(d.detection));
+        .y(d => yScale(d.coastguard));
 
     svg
         .append("path")
         .attr("class", "line")
-        .datum(dataLine)
+        .datum(dataAll)
         .attr("fill", "none")
-        .attr("stroke", "#8FA0D8")
+        .attr("stroke", "#113061")
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3.5)
+        .attr("stroke-width", 3)
         .attr("d", line);
 
     var path = d3.select("path.line");
 
     var pathLength = path.node().getTotalLength();
-    console.log(pathLength)
+    // console.log(pathLength)
 
     path
         .attr("stroke-dashoffset", pathLength)
@@ -274,29 +276,44 @@
 
     var type = d3.annotationCalloutCircle;
 
-    var filtered = dataBar.filter(function(d) {
-        return d.yearmonth === "2017-10" || d.yearmonth === "2018-11" || d.yearmonth === "2019-9" || d.yearmonth === "2020-5";
+    var filtered = dataAll.filter(function(d) {
+        return d.yearmonth === "2017-10" || d.yearmonth === "2018-10" || d.yearmonth === "2019-10" || d.yearmonth === "2020-5";
     });
 
+    var mapXOffset = d3.scaleOrdinal().domain(["2017-10","2018-10","2019-10","2020-5"]).range([7,2,-3,-6]);
+
     console.log(filtered)
+
+    filtered.forEach(d =>
+        d['offset'] = mapXOffset(d.yearmonth)
+    )
+
     //
     var annotationData = _.chain(filtered)
         .map((d, i) => {
             return {
                 data: {
                     date: d.date,
-                    max: d.max,
-                    totalyear: d.totalyear,
-                    description: d.description
+                    year: d.year,
+                    coastguard: d.coastguard,
+                    viirs:d.viirs,
+                    satellite:d.satellite,
+                    totalyearV: d.totalyearV,
+                    totalyearS: d.totalyearS,
+                    totalyearC: d.totalyearC,
+                    description: d.description,
+                    offset:d.offset
                 },
                 note: {
-                    title: `Yearly total: ${d.totalyear}  Max: ${d.max}`,
+                    title: `${d.year} total: ${d.totalyearV + d.totalyearS} Max:${d.viirs + d.satellite}`,
                     label: `${d.description}`
                 },
-                x: xScale(d.date),
-                y: yScale(d.max),
-                dx: (d.yearmonth == "2017-10" || d.yearmonth == "2019-9") ? 30 : 30,
-                dy: (d.yearmonth == "2017-10" || d.yearmonth == "2019-9") ? 30 : -30,
+                x: xScale(d.date)+d.offset,
+                y: yScale(d.viirs + d.satellite),
+                dx:  30,
+                // (d.yearmonth == "2017-10" || d.yearmonth == "2019-10") ? 30 : 50,
+                dy: d.yearmonth == "2017-10"? 30 : -30,
+                // (d.yearmonth == "2017-10" || d.yearmonth == "2019-10") ? 30 : -50,
                 subject: {
                     radius: 20
                 }
@@ -324,6 +341,47 @@
     function showAnnotations() {
         d3.selectAll(".annotations").style("opacity", 1);
     }
+
+    //******
+    //legend
+    //******
+
+    var legendData = [{"name":"Pair trawlers","color":"#8FA0D8"},{"name":"Lighting vessels","color":"#C0594F"}, {"name":"Coastguard","color":"#113061"}];
+    var legend = svg.append("g").attr("transform","translate(50,30)");
+
+    legend.selectAll("rect.legend")
+    .data(legendData)
+    .enter().append("rect")
+    .attr("class","legend")
+    .attr("x", 0)
+    .attr("y", (d,i) => d.name =="Coastguard"?(i*30+(20-3)/2):(i*30)) // to make it so the coastgaurd legend is a thick line instead of a rect
+    .attr("width", 20)
+    .attr("height", d=> d.name =="Coastguard"?3:20)
+    .attr("fill", d=>d.color);
+
+    legend.selectAll("text.legend")
+    .data(legendData)
+    .enter().append("text")
+    .attr("class","legend")
+    .attr("x", 25)
+    .attr("y", (d,i) => 15+i*30)
+    .attr("fill","black")
+    .text(d=>d.name);
+
+
+    //****
+    //logo
+    //****
+
+    var logo = svg.append("g").attr("transform", `translate(${width-140-margin.right},10)`);
+
+    logo.append("svg:image")
+        .attr("xlink:href", "./logo.png")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 180)
+        .attr("height", 47);
+
 
     </script>
   </body>
