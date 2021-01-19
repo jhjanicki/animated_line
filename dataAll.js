@@ -10,7 +10,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 2,
@@ -23,7 +23,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 3,
@@ -36,7 +36,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 4,
@@ -49,7 +49,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 5,
@@ -62,7 +62,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 6,
@@ -75,7 +75,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 7,
@@ -88,7 +88,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 8,
@@ -101,7 +101,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 9,
@@ -114,7 +114,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 10,
@@ -127,7 +127,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 11,
@@ -140,7 +140,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 12,
@@ -153,7 +153,7 @@ var dataAll = [
     "totalyearV": 350,
     "totalyearS": 3252,
     "totalyearC": 4268,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 13,
@@ -166,7 +166,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 14,
@@ -179,7 +179,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 15,
@@ -192,7 +192,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 16,
@@ -205,7 +205,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 17,
@@ -218,7 +218,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 18,
@@ -231,7 +231,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 19,
@@ -244,7 +244,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 20,
@@ -257,7 +257,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 21,
@@ -270,7 +270,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 22,
@@ -283,7 +283,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 23,
@@ -296,7 +296,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 24,
@@ -309,7 +309,7 @@ var dataAll = [
     "totalyearV": 277,
     "totalyearS": 2896,
     "totalyearC": 2444,
-    "description": "Decreased activity due to heat wave"
+    "description": "Decreased fishing activity due to heat wave"
   },
   {
     "id": 25,
@@ -322,7 +322,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 26,
@@ -335,7 +335,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 27,
@@ -348,7 +348,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 28,
@@ -361,7 +361,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 29,
@@ -374,7 +374,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 30,
@@ -387,7 +387,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 31,
@@ -400,7 +400,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 32,
@@ -413,7 +413,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 33,
@@ -426,7 +426,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 34,
@@ -439,7 +439,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 35,
@@ -452,7 +452,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 36,
@@ -465,7 +465,7 @@ var dataAll = [
     "totalyearV": 387,
     "totalyearS": 3108,
     "totalyearC": 4383,
-    "description": "Normal year"
+    "description": "Normal fishing activity"
   },
   {
     "id": 37,
