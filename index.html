@@ -77,9 +77,9 @@
 
     //begin: layout conf.
     var width = 1000,
-        height = 500,
+        height = 580,
         margin = {
-            top: 10,
+            top: 30,
             right: 50,
             bottom: 30,
             left: 40
@@ -132,6 +132,13 @@
     svg.call(texture);
 
 
+    svg.append("text")
+       .attr("class","y-label")
+       .attr("x",5)
+       .attr("y",15)
+       .style("font-size",11)
+       .style("font-weight",700)
+       .text("Vessel count");
 
 
     //**************
@@ -154,7 +161,11 @@
         .attr("y", margin.top)
         .attr("width", xScale(parser("2020-01")) - xScale(parser("2019-01")))
         .attr("height", yScale(0) - yScale(max))
-        .attr("fill", texture.url());
+        .attr("fill", texture.url())
+
+    d3.selectAll(".bgRect")
+    .style("opacity",0.5)
+
 
 
 
@@ -168,7 +179,7 @@
     // )
 
     var stack = d3.stack()
-        .keys(["satellite", "viirs"])
+        .keys(["viirs","satellite"])
 
     var series = stack(dataAll);
 
@@ -274,19 +285,21 @@
     //annotations
     //***********
 
-    var type = d3.annotationCalloutCircle;
+    var type = d3.annotationLabel;
 
     var filtered = dataAll.filter(function(d) {
-        return d.yearmonth === "2017-10" || d.yearmonth === "2018-10" || d.yearmonth === "2019-10" || d.yearmonth === "2020-5";
+        return d.yearmonth === "2017-6" || d.yearmonth === "2018-6" || d.yearmonth === "2019-6" || d.yearmonth === "2020-6";
     });
 
-    var mapXOffset = d3.scaleOrdinal().domain(["2017-10","2018-10","2019-10","2020-5"]).range([7,2,-3,-6]);
+    // var mapXOffset = d3.scaleOrdinal().domain(["2017-10","2018-10","2019-10","2020-5"]).range([7,2,-3,-6]);
+
+    var titleXPos = d3.scaleOrdinal().domain(["2017-160","2018-6","2019-6","2020-6"]).range([155,390,620,870]);
 
     console.log(filtered)
 
-    filtered.forEach(d =>
-        d['offset'] = mapXOffset(d.yearmonth)
-    )
+    // filtered.forEach(d =>
+    //     d['offset'] = mapXOffset(d.yearmonth)
+    // )
 
     //
     var annotationData = _.chain(filtered)
@@ -302,18 +315,19 @@
                     totalyearS: d.totalyearS,
                     totalyearC: d.totalyearC,
                     description: d.description,
-                    offset:d.offset
+                    totalDays:d.totalDays
                 },
                 note: {
-                    title: `${d.year} total: ${d.totalyearV + d.totalyearS} Max:${d.viirs + d.satellite}`,
+                    title: `Total days of fishing (${d.year}): ${d.totalDays}`,
                     label: `${d.description}`
                 },
-                x: xScale(d.date)+d.offset,
-                y: yScale(d.viirs + d.satellite),
-                dx:  30,
-                // (d.yearmonth == "2017-10" || d.yearmonth == "2019-10") ? 30 : 50,
-                dy: d.yearmonth == "2017-10"? 30 : -30,
-                // (d.yearmonth == "2017-10" || d.yearmonth == "2019-10") ? 30 : -50,
+                x: titleXPos(d.date),
+                y: 42,
+                // yScale(d.viirs + d.satellite)
+                dx:0,
+                // 30,
+                dy:0,
+                // d.yearmonth == "2017-10"? 30 : -30,
                 subject: {
                     radius: 20
                 }
@@ -323,6 +337,7 @@
 
     var makeAnnotations = d3.annotation()
         .type(type)
+        .textWrap(220)
         //accessors & accessorsInverse not needed
         //if using x, y in annotations JSON
         .annotations(annotationData);
@@ -347,25 +362,27 @@
     //******
 
     var legendData = [{"name":"Pair trawlers","color":"#8FA0D8"},{"name":"Lighting vessels","color":"#C0594F"}, {"name":"Coastguard","color":"#113061"}];
-    var legend = svg.append("g").attr("transform","translate(50,30)");
+    var legend = svg.append("g").attr("transform","translate(45,100)");
 
     legend.selectAll("rect.legend")
     .data(legendData)
     .enter().append("rect")
     .attr("class","legend")
     .attr("x", 0)
-    .attr("y", (d,i) => d.name =="Coastguard"?(i*30+(20-3)/2):(i*30)) // to make it so the coastgaurd legend is a thick line instead of a rect
-    .attr("width", 20)
-    .attr("height", d=> d.name =="Coastguard"?3:20)
-    .attr("fill", d=>d.color);
+    .attr("y", (d,i) => d.name =="Coastguard"?(i*25+(18-3)/2):(i*25)) // to make it so the coastgaurd legend is a thick line instead of a rect
+    .attr("width", 18)
+    .attr("height", d=> d.name =="Coastguard"?3:18)
+    .attr("fill", d=>d.color)
+    .attr("stroke", d=> d.name !="Coastguard"? "black":"none");
 
     legend.selectAll("text.legend")
     .data(legendData)
     .enter().append("text")
     .attr("class","legend")
-    .attr("x", 25)
-    .attr("y", (d,i) => 15+i*30)
+    .attr("x", 23)
+    .attr("y", (d,i) => 13+i*25)
     .attr("fill","black")
+    .style("font-size",14)
     .text(d=>d.name);
 
 
@@ -373,14 +390,14 @@
     //logo
     //****
 
-    var logo = svg.append("g").attr("transform", `translate(${width-140-margin.right},10)`);
+    var logo = svg.append("g").attr("transform", `translate(${width-105-margin.right},5)`);
 
     logo.append("svg:image")
         .attr("xlink:href", "./logo.png")
         .attr("x", 0)
         .attr("y", 0)
-        .attr("width", 180)
-        .attr("height", 47);
+        .attr("width", 150)
+        .attr("height", 39);
 
 
     </script>
