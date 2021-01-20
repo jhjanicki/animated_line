@@ -11,7 +11,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 2,
@@ -25,7 +25,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 3,
@@ -39,7 +39,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 4,
@@ -53,7 +53,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 5,
@@ -67,7 +67,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 6,
@@ -81,7 +81,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 7,
@@ -95,7 +95,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 8,
@@ -109,7 +109,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 9,
@@ -123,7 +123,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 10,
@@ -137,7 +137,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 11,
@@ -151,7 +151,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 12,
@@ -165,7 +165,7 @@ var dataAll = [
     "totalyearS": 3252,
     "totalyearC": 4268,
     "description": "Normal fishing activity",
-    "totalDays": 91000
+    "totalDays": "91,000"
   },
   {
     "id": 13,
@@ -179,7 +179,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 14,
@@ -193,7 +193,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 15,
@@ -207,7 +207,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 16,
@@ -221,7 +221,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 17,
@@ -235,7 +235,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 18,
@@ -249,7 +249,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 19,
@@ -263,7 +263,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 20,
@@ -277,7 +277,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 21,
@@ -291,7 +291,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 22,
@@ -305,7 +305,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 23,
@@ -319,7 +319,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 24,
@@ -333,7 +333,7 @@ var dataAll = [
     "totalyearS": 2896,
     "totalyearC": 2444,
     "description": "Decreased fishing activity due to heat wave",
-    "totalDays": 67000
+    "totalDays": "67,000"
   },
   {
     "id": 25,
@@ -347,7 +347,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 26,
@@ -361,7 +361,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 27,
@@ -375,7 +375,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 28,
@@ -389,7 +389,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 29,
@@ -403,7 +403,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 30,
@@ -417,7 +417,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 31,
@@ -431,7 +431,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 32,
@@ -445,7 +445,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 33,
@@ -459,7 +459,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 34,
@@ -473,7 +473,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 35,
@@ -487,7 +487,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 36,
@@ -501,7 +501,7 @@ var dataAll = [
     "totalyearS": 3108,
     "totalyearC": 4383,
     "description": "Normal fishing activity",
-    "totalDays": 82000
+    "totalDays": "82,000"
   },
   {
     "id": 37,
@@ -515,7 +515,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 38,
@@ -529,7 +529,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 39,
@@ -543,7 +543,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 40,
@@ -557,7 +557,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 41,
@@ -571,7 +571,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 42,
@@ -585,7 +585,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 43,
@@ -599,7 +599,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 44,
@@ -613,7 +613,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 45,
@@ -627,7 +627,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 46,
@@ -641,7 +641,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 47,
@@ -655,7 +655,7 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   },
   {
     "id": 48,
@@ -669,6 +669,6 @@ var dataAll = [
     "totalyearS": 2658,
     "totalyearC": 2698,
     "description": "Activity dropped by ~ 50% in the second half of the fishing season",
-    "totalDays": 57000
+    "totalDays": "57,000"
   }
 ]

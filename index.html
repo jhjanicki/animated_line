@@ -69,6 +69,9 @@
     <script>
 
 
+setTimeout(startAnimation, 1000);
+setTimeout(startAnimation2, 1000);
+
 
     //********************
     // setup, scales, etc.
@@ -203,6 +206,7 @@
         .attr("class", "sensor")
         .attr("fill", d => color(d.key));
 
+function startAnimation(){
     var rect = groups.selectAll("rect")
         .data(function(d) {
             console.log(d);
@@ -219,7 +223,7 @@
         // .duration(6000)
         .attr("height", d => yScale(d[0]) - yScale(d[1]))
         .delay(delay);
-
+}
 
     //*********
     //bar chart
@@ -263,6 +267,7 @@
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
+        .style("opacity",0)
         .attr("d", line);
 
     var path = d3.select("path.line");
@@ -270,15 +275,17 @@
     var pathLength = path.node().getTotalLength();
     // console.log(pathLength)
 
+function startAnimation2(){
     path
         .attr("stroke-dashoffset", pathLength)
         .attr("stroke-dasharray", pathLength)
+        .style("opacity",1)
         .transition()
         .duration(duration)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0)
         .on("end", showAnnotations)
-
+}
 
 
     //***********
